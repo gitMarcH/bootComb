@@ -5,3 +5,4 @@ export(bootComb)
 importFrom("graphics", "abline", "hist", "layout", "legend")
 importFrom("stats", "quantile")
 importFrom("HDInterval", "hdi")
+

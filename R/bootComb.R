@@ -4,7 +4,7 @@
 #' It does this by using the parametric bootstrap to simulate values from the distribution of each estimate to build up an empirical distribution of the combined parameter.
 #' Finally either the percentile method is used or the highest density interval is chosen to derive a confidence interval for the combined parameter with the desired coverage.
 #'
-#' @param distList A list object where each element of the list is a sampling function for a probability disribution function (i.e. like rnorm, rbeta, ...).
+#' @param distList A list object where each element of the list is a sampling function for a probability distribution function (i.e. like rnorm, rbeta, ...).
 #' @param combFun The function to combine the different estimates to a new parameter. Needs to take a single list as input argument, one element of the list for each estimate. This list input argument needs to be a list of same length as distList.
 #' @param N The number of bootstrap samples to take. Defaults to 1e6.
 #' @param method The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval)..
@@ -13,11 +13,30 @@
 #'
 #' @return conf.int A vector of length 2 giving the loweer and upper limits of the computed confidence interval.
 #'
-#' @examples dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
+#' @examples
+#' ## Example 1 - product of 2 beta distributions
+#' dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
 #' dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
 #' distListEx<-list(alpha=dist1,beta=dist2)
 #' combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 #' bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
+#'
+#'
+#' ## Example 2 - sum of 2 Gaussian distributions
+#' dist1<-function(n){rnorm(n,mean=5,sd=3)}
+#' dist2<-function(n){rnorm(n,mean=2,sd=1)}
+#' distListEx<-list(x=dist1,y=dist2)
+#' combFunEx<-function(pars){pars[[1]]+pars[[2]]}
+#' bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
+#'
+#' # Compare with theoretical result:
+#' exactCI<-qnorm(c(0.025,0.975),mean=5+2,sd=sqrt(3^2+1^2))
+#' print(exactCI)
+#' x<-seq(0,14,length=1e3)
+#' y<-dnorm(x,mean=5+2,sd=sqrt(3^2+1^2))
+#' lines(x,y,col="red")
+#' abline(v=exactCI[1],col="red",lty=3)
+#' abline(v=exactCI[2],col="red",lty=3)
 #'
 #' @export bootComb
 
