@@ -38,23 +38,24 @@ Finally either the percentile method is used or the highest density interval is 
 ## Example 1 - product of 2 beta distributions
 dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
 dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
-distListEx<-list(alpha=dist1,beta=dist2)
+distListEx<-list(dist1,dist2)
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
 
 
-## Example 2 - sum of 2 Gaussian distributions
+## Example 2 - sum of 3 Gaussian distributions
 dist1<-function(n){rnorm(n,mean=5,sd=3)}
-dist2<-function(n){rnorm(n,mean=2,sd=1)}
-distListEx<-list(x=dist1,y=dist2)
-combFunEx<-function(pars){pars[[1]]+pars[[2]]}
-bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
+dist2<-function(n){rnorm(n,mean=2,sd=2)}
+dist3<-function(n){rnorm(n,mean=1,sd=0.5)}
+distListEx<-list(dist1,dist2,dist3)
+combFunEx<-function(pars){pars[[1]]+pars[[2]]+pars[[3]]}
+bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE,method="quantile")
 
 # Compare with theoretical result:
-exactCI<-qnorm(c(0.025,0.975),mean=5+2,sd=sqrt(3^2+1^2))
+exactCI<-qnorm(c(0.025,0.975),mean=5+2+1,sd=sqrt(3^2+2^2+0.5^2))
 print(exactCI)
-x<-seq(0,14,length=1e3)
-y<-dnorm(x,mean=5+2,sd=sqrt(3^2+1^2))
+x<-seq(-10,30,length=1e3)
+y<-dnorm(x,mean=5+2+1,sd=sqrt(3^2+2^2+0.5^2))
 lines(x,y,col="red")
 abline(v=exactCI[1],col="red",lty=3)
 abline(v=exactCI[2],col="red",lty=3)
