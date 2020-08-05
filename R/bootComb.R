@@ -10,6 +10,7 @@
 #' @param method The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval)..
 #' @param coverage The desired coverage of the resulting confidence interval.Defaults to 0.95.
 #' @param doPlot Logical; indicates whether a graph should be produced showing the input distributions and the resulting empirical distribution of the combined estimate together with the reported confidence interval. Defaults to FALSE.
+#' @param legPos legend position (only used if doPlot==TRUE); one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center"
 #'
 #' @return conf.int A vector of length 2 giving the loweer and upper limits of the computed confidence interval.
 #'
@@ -41,7 +42,7 @@
 #'
 #' @export bootComb
 
-bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F){
+bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,legPos="topright"){
   pars<-vector("list",length=length(distList))
 
   for(k in 1:length(distList)){
@@ -62,13 +63,13 @@ bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F){
     layout(matrix(c(1:length(distList),rep(length(distList)+1,length(distList))),nrow=2,byrow=T))
 
     for(k in 1:length(distList)){
-      hist(pars[[k]],breaks=100,xlab=names(distList)[k],ylab="density",freq=F,main=paste(sep="","Histogram of the samples values for parameter ",k,"."))
+      hist(pars[[k]],breaks=100,xlab=names(distList)[k],ylab="density",freq=F,main=paste(sep="","Histogram - sampled values for parameter ",k,"."))
     }
 
     hist(combParVals,breaks=100,freq=F,xlab="combined parameter",ylab="density",main="Empirical distribution of the combined parameter.")
     abline(v=ci[1],lty=2,lwd=2,col="steelblue")
     abline(v=ci[2],lty=2,lwd=2,col="steelblue")
-    legend(x="top",bty="n",horiz=T,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
+    legend(x=legPos,bty="n",horiz=T,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
   }
 
   return(ci)

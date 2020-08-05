@@ -10,7 +10,8 @@ bootComb(
   N = 1e+06,
   method = "hdi",
   coverage = 0.95,
-  doPlot = F
+  doPlot = F,
+  legPos = "topright"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ bootComb(
 \item{coverage}{The desired coverage of the resulting confidence interval.Defaults to 0.95.}
 
 \item{doPlot}{Logical; indicates whether a graph should be produced showing the input distributions and the resulting empirical distribution of the combined estimate together with the reported confidence interval. Defaults to FALSE.}
+
+\item{legPos}{legend position (only used if doPlot==TRUE); one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center"}
 }
 \value{
 conf.int A vector of length 2 giving the loweer and upper limits of the computed confidence interval.
