@@ -1,13 +1,13 @@
 Package: bootComb
 Type: Package
-Title: Combine parameter estimates via parametric bootstrap
+Title: Combine Parameter Estimates via Parametric Bootstrap
 Version: 0.1.0
 Author: Marc Henrion
 Maintainer: Marc Henrion <mhenrion@mlw.mw>
-Description: This package propagates uncertainty from several estimates when combining these estimates via a function.
-    It does this by using the parametric bootstrap to simulate values from the distribution of each estimate to build up an empirical distribution of the combined parameter.
+Description: Propagate uncertainty from several estimates when combining these estimates via a function.
+    This is done by using the parametric bootstrap to simulate values from the distribution of each estimate to build up an empirical distribution of the combined parameter.
     Finally either the percentile method is used or the highest density interval is chosen to derive a confidence interval for the combined parameter with the desired coverage.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:

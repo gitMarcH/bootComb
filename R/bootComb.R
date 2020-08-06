@@ -22,8 +22,6 @@
 #' @seealso
 #' \code{\link[HDInterval]{hdi}}
 #'
-#' @references To be inserted here.
-#'
 #' @examples
 #' ## Example 1 - product of 2 beta distributions
 #' dist1<-function(n){rbeta(n,shape1=2,shape2=2)}

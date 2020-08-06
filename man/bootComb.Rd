@@ -71,9 +71,6 @@ abline(v=exactCI[1],col="red",lty=3)
 abline(v=exactCI[2],col="red",lty=3)
 
 }
-\references{
-To be inserted here.
-}
 \seealso{
 \code{\link[HDInterval]{hdi}}
 }

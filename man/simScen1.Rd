@@ -26,8 +26,10 @@ A single number, the proportion of simulations for which the confidence interval
 This is a simulation to compute the coverage of the confidence interval returned by bootComb() in the case of the product of 2 probability parameter estimates.
 }
 \examples{
-simScen1(p1=0.35,p2=0.2,nExp1=100,nExp2=1000,B=250)
+\dontrun{
+simScen1(p1=0.35,p2=0.2,nExp1=100,nExp2=1000,B=100)
   # B value only for convenience here
   # Increase B to 1e3 or 1e4 (be aware this may run for some time).
+ }
 
 }

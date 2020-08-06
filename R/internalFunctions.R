@@ -64,9 +64,11 @@ identifyBetaPars<-function(pLow,pUpp,alpha=0.05,initPars=c(50,50)){
 #' @return A single number, the proportion of simulations for which the confidence interval contained the true parameter value.
 #'
 #' @examples
-#' simScen1(p1=0.35,p2=0.2,nExp1=100,nExp2=1000,B=250)
+#' \dontrun{
+#' simScen1(p1=0.35,p2=0.2,nExp1=100,nExp2=1000,B=100)
 #'   # B value only for convenience here
 #'   # Increase B to 1e3 or 1e4 (be aware this may run for some time).
+#'  }
 #'
 #' @export simScen1
 
