@@ -1,18 +1,28 @@
 #' @title Combine parameter estimates via bootstrap
 #'
-#' @description This package propagates uncertainty from several estimates when combining these estimates via a function.
+#' @description
+#' This package propagates uncertainty from several estimates when combining these estimates via a function.
 #' It does this by using the parametric bootstrap to simulate values from the distribution of each estimate to build up an empirical distribution of the combined parameter.
 #' Finally either the percentile method is used or the highest density interval is chosen to derive a confidence interval for the combined parameter with the desired coverage.
 #'
 #' @param distList A list object where each element of the list is a sampling function for a probability distribution function (i.e. like rnorm, rbeta, ...).
 #' @param combFun The function to combine the different estimates to a new parameter. Needs to take a single list as input argument, one element of the list for each estimate. This list input argument needs to be a list of same length as distList.
 #' @param N The number of bootstrap samples to take. Defaults to 1e6.
-#' @param method The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval)..
+#' @param method The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval).
 #' @param coverage The desired coverage of the resulting confidence interval.Defaults to 0.95.
 #' @param doPlot Logical; indicates whether a graph should be produced showing the input distributions and the resulting empirical distribution of the combined estimate together with the reported confidence interval. Defaults to FALSE.
-#' @param legPos legend position (only used if doPlot==TRUE); one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center"
+#' @param legPos Legend position (only used if doPlot==TRUE); either NULL (no legend) or one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center".
+#' @param returnBootVals Logical; if TRUE then the parameter values computed from the boostrapped input parameter values will be returned; defaults to FALSE.
+#' @param validRange Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded.
 #'
-#' @return conf.int A vector of length 2 giving the loweer and upper limits of the computed confidence interval.
+#' @return A list with 2 elements:
+#'   \code{conf.int} a vector of length 2 giving the lower and upper limits of the computed confidence interval.
+#'   \code{bootstrapValues} a vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)
+#'
+#' @seealso
+#' \code{\link[HDInterval]{hdi}}
+#'
+#' @references To be inserted here.
 #'
 #' @examples
 #' ## Example 1 - product of 2 beta distributions
@@ -21,7 +31,6 @@
 #' distListEx<-list(dist1,dist2)
 #' combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 #' bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
-#'
 #'
 #' ## Example 2 - sum of 3 Gaussian distributions
 #' dist1<-function(n){rnorm(n,mean=5,sd=3)}
@@ -42,7 +51,7 @@
 #'
 #' @export bootComb
 
-bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,legPos="topright"){
+bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,legPos="topright",returnBootVals=FALSE,validRange=NULL){
   pars<-vector("list",length=length(distList))
 
   for(k in 1:length(distList)){
@@ -50,6 +59,10 @@ bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,le
   }
 
   combParVals<-combFun(pars)
+  if(!is.null(validRange)){
+    combParVals<-combParVals[combParVals>=validRange[1] & combParVals<=validRange[2]]
+    if(length(combParVals)==0){stop("All sample values are outside the valid range.")}
+  }
 
   if(method=="hdi"){
     ci<-HDInterval::hdi(combParVals,credMass=coverage)
@@ -66,11 +79,15 @@ bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,le
       hist(pars[[k]],breaks=100,xlab=names(distList)[k],ylab="density",freq=F,main=paste(sep="","Histogram - sampled values for parameter ",k,"."))
     }
 
-    hist(combParVals,breaks=100,freq=F,xlab="combined parameter",ylab="density",main="Empirical distribution of the combined parameter.")
+    hist(combParVals,breaks=100,freq=FALSE,xlab="combined parameter",ylab="density",main="Empirical distribution of the combined parameter.")
     abline(v=ci[1],lty=2,lwd=2,col="steelblue")
     abline(v=ci[2],lty=2,lwd=2,col="steelblue")
-    legend(x=legPos,bty="n",horiz=T,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
+    if(!is.null(legPos)){
+      legend(x=legPos,bty="n",horiz=T,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
+    }
   }
 
-  return(ci)
+  if(!returnBootVals){combParVals<-NULL}
+
+  return(list(conf.int=ci,bootstrapValues=combParVals))
 }

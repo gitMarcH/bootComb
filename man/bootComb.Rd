@@ -11,7 +11,9 @@ bootComb(
   method = "hdi",
   coverage = 0.95,
   doPlot = F,
-  legPos = "topright"
+  legPos = "topright",
+  returnBootVals = FALSE,
+  validRange = NULL
 )
 }
 \arguments{
@@ -21,16 +23,22 @@ bootComb(
 
 \item{N}{The number of bootstrap samples to take. Defaults to 1e6.}
 
-\item{method}{The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval)..}
+\item{method}{The method uses to derive a confidence interval from the empirical distribution of the combined parameter.Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval).}
 
 \item{coverage}{The desired coverage of the resulting confidence interval.Defaults to 0.95.}
 
 \item{doPlot}{Logical; indicates whether a graph should be produced showing the input distributions and the resulting empirical distribution of the combined estimate together with the reported confidence interval. Defaults to FALSE.}
 
-\item{legPos}{legend position (only used if doPlot==TRUE); one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center"}
+\item{legPos}{Legend position (only used if doPlot==TRUE); either NULL (no legend) or one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center".}
+
+\item{returnBootVals}{Logical; if TRUE then the parameter values computed from the boostrapped input parameter values will be returned; defaults to FALSE.}
+
+\item{validRange}{Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded.}
 }
 \value{
-conf.int A vector of length 2 giving the loweer and upper limits of the computed confidence interval.
+A list with 2 elements:
+  \code{conf.int} a vector of length 2 giving the lower and upper limits of the computed confidence interval.
+  \code{bootstrapValues} a vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)
 }
 \description{
 This package propagates uncertainty from several estimates when combining these estimates via a function.
@@ -44,7 +52,6 @@ dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
 distListEx<-list(dist1,dist2)
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
-
 
 ## Example 2 - sum of 3 Gaussian distributions
 dist1<-function(n){rnorm(n,mean=5,sd=3)}
@@ -63,4 +70,10 @@ lines(x,y,col="red")
 abline(v=exactCI[1],col="red",lty=3)
 abline(v=exactCI[2],col="red",lty=3)
 
+}
+\references{
+To be inserted here.
+}
+\seealso{
+\code{\link[HDInterval]{hdi}}
 }
