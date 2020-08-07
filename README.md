@@ -16,22 +16,22 @@ The method assumes that the combined estimates are independent. This is generall
 
 ### From CRAN (stable version)
 
-\code{
+``` r
 install.packages('bootComb')
-}
+```
 
 ### From GitHub (development version)
 
-\code{
+``` r
 # install.packages("devtools")
 devtools::install_github("gitMarcH/bootComb")
-}
+```
 
 ## Example
 
 Product of 2 probability parameters with beta distributions.
 
-\code{
+``` r
 library(bootComb)
 
 dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
@@ -50,4 +50,4 @@ bootComb(distList=distListEx,combFun=combFunEx)
 #> 
 #> $bootstrapValues
 #> NULL
-}
+```
