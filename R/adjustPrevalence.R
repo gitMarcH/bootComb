@@ -113,7 +113,7 @@ adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,d
   if(!is.null(prev) & !is.null(sens) & !is.null(spec)){
     res<-list(estimate=adjPrev,conf.int=adjPrevCI$conf.int)
   }else{
-    res<-list(cestimate=NULL,onf.int=adjPrevCI$conf.int)
+    res<-list(cestimate=NULL,conf.int=adjPrevCI$conf.int)
   }
     return(res)
 }

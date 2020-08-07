@@ -13,14 +13,16 @@ simScen1(B = 1000, p1, p2, nExp1, nExp2, alpha = 0.05)
 
 \item{p2}{The true value of the second probability parameter.}
 
-\item{nExp1}{The size of each simulated experiment to estimate p1.}
+\item{nExp1}{The size of each simulated experiment to estimate \code{p1}.}
 
-\item{nExp2}{TThe size of each simulated experiment to estimate p2.}
+\item{nExp2}{TThe size of each simulated experiment to estimate \code{p2}.}
 
 \item{alpha}{The confidence level; i.e. the desired coverage is 1-alpha. Defaults to 0.05.}
 }
 \value{
-A single number, the proportion of simulations for which the confidence interval contained the true parameter value.
+A list with 2 elements:
+   \code{estimate} A single number, the proportion of simulations for which the confidence interval contained the true parameter value.
+   \code{conf.int} A 95% confidence interval for the coverage estimate.
 }
 \description{
 This is a simulation to compute the coverage of the confidence interval returned by bootComb() in the case of the product of 2 probability parameter estimates.

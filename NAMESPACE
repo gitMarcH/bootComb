@@ -5,6 +5,7 @@ export(adjPrevSensSpecCI)
 export(bootComb)
 export(identifyBetaPars)
 export(simScen1)
+export(simScen2)
 
 importFrom("stats", "quantile","binom.test", "optim", "dbeta", "qbeta", "rbeta", "rbinom")
 importFrom("graphics", "abline", "hist", "layout", "legend", "lines", "par")

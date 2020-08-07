@@ -4,7 +4,13 @@
 \alias{identifyBetaPars}
 \title{Determine the best-fit beta distribution for a given confidence interval for a probability parameter.}
 \usage{
-identifyBetaPars(pLow, pUpp, alpha = 0.05, initPars = c(50, 50))
+identifyBetaPars(
+  pLow,
+  pUpp,
+  alpha = 0.05,
+  initPars = c(50, 50),
+  maxiter = 1000
+)
 }
 \arguments{
 \item{pLow}{The observed lower quantile .}
@@ -14,6 +20,8 @@ identifyBetaPars(pLow, pUpp, alpha = 0.05, initPars = c(50, 50))
 \item{alpha}{The confidence level; i.e. the desired coverage is 1-alpha. Defaults to 0.05.}
 
 \item{initPars}{A vector of length 2 giving the initial parameter values to start the optimisation; defaults to c(50,50).}
+
+\item{maxiter}{Maximum number of iterations for \code{optim}. Defaults to 1e3. Set to higher values if convergence problems are reported.}
 }
 \value{
 A vector of length 2 giving the 2 parameter shape1 and shape1 for use with rebta/dbeta/ppbeta/qbeta
