@@ -8,7 +8,7 @@
 * added `getBetaFromCI`, a function that returns beta distribution functions from a given confidence interval (and in particular a random sampling function)
 * added `getNormFromCI`, a function that returns normal distribution functions from a given confidence interval (and in particular a random sampling function)
 * added `getPoisFromCI`, a function that returns Poisson distribution functions from a given confidence interval (and in particular a random sampling function)
-* change the organisation of code within the source R code files
+* changed the organisation of code within the source R code files
 
 # bootComb 0.1.0
 
