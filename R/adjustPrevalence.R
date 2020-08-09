@@ -49,9 +49,9 @@ adjPrevSensSpec<-function(prevEst,sens,spec,replaceImpossibleValues=FALSE){
 #' @param spec Optional; if not NULL, and parameters \code{prev} and \code{sens} are also not NULL, then an adjusted point estimate will also be calculated.
 #' @param ylim Optional; a vector of length 2, giving the vertical limits for the top panel of the produced plot. Only used if \code{doPlot} is set to \code{TRUE}.
 #'
-#' @return A list object with either 2 elements:
-#'   \code{estimate} the adjusted prevalence point estimate (only non-NULL if \code{prev}, \code{sens} and \code{spec} are specified).
-#'   \code{conf.int} the confidence interval for the adjusted prevalence.
+#' @return A list object with 2 elements:
+#' \item{estimate}{The adjusted prevalence point estimate (only non-NULL if \code{prev}, \code{sens} and \code{spec} are specified).}
+#' \item{conf.int}{The confidence interval for the adjusted prevalence.}
 #'
 #' @seealso
 #' \code{\link{bootComb}}, \code{\link{adjPrevSensSpec}}, \code{\link{identifyBetaPars}}, \code{\link{dbeta}}, \code{\link[HDInterval]{hdi}}
@@ -70,15 +70,11 @@ adjPrevSensSpec<-function(prevEst,sens,spec,replaceImpossibleValues=FALSE){
 
 adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,doPlot=FALSE,prev=NULL,sens=NULL,spec=NULL,ylim=NULL){
 
-  betaParsPrev<-identifyBetaPars(pLow=prevCI[1],pUpp=prevCI[2])
-  betaParsSens<-identifyBetaPars(pLow=sensCI[1],pUpp=sensCI[2])
-  betaParsSpec<-identifyBetaPars(pLow=specCI[1],pUpp=specCI[2])
+  prevDist<-getBetaFromCI(pLow=prevCI[1],pUpp=prevCI[2])
+  sensDist<-getBetaFromCI(pLow=sensCI[1],pUpp=sensCI[2])
+  specDist<-getBetaFromCI(pLow=specCI[1],pUpp=specCI[2])
 
-  prevDist<-function(n){rbeta(n,betaParsPrev[1],betaParsPrev[2])}
-  sensDist<-function(n){rbeta(n,betaParsSens[1],betaParsSens[2])}
-  specDist<-function(n){rbeta(n,betaParsSpec[1],betaParsSpec[2])}
-
-  distList<-list(prevDist,sensDist,specDist)
+  distList<-list(prevDist$r,sensDist$r,specDist$r)
   combFun<-function(pars){adjPrevSensSpec(prevEst=pars[[1]],sens=pars[[2]],spec=pars[[3]])}
 
   if(!is.null(prev) & !is.null(sens) & !is.null(spec)){
@@ -91,9 +87,9 @@ adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,d
     par(mfrow=c(2,1))
 
     x<-seq(0,1,length=1000)
-    yPrev<-dbeta(x,betaParsPrev[1],betaParsPrev[2])
-    ySens<-dbeta(x,betaParsSens[1],betaParsSens[2])
-    ySpec<-dbeta(x,betaParsSpec[1],betaParsSpec[2])
+    yPrev<-dbeta(x,prevDist$pars[1],prevDist$pars[2])
+    ySens<-dbeta(x,sensDist$pars[1],sensDist$pars[2])
+    ySpec<-dbeta(x,specDist$pars[1],specDist$pars[2])
     if(is.null(ylim)){ylim<-c(0,max(c(yPrev,ySens,ySpec)))}
 
     plot(x,yPrev,xlim=c(0,1),ylim=ylim,xlab="probability parameter",ylab="density",type="l",col="steelblue",lwd=2,main="Estimated densities of prevalence, sensitivity and specificity from their 95% confidence intervals.")

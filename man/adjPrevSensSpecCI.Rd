@@ -42,9 +42,9 @@ adjPrevSensSpecCI(
 \item{ylim}{Optional; a vector of length 2, giving the vertical limits for the top panel of the produced plot. Only used if \code{doPlot} is set to \code{TRUE}.}
 }
 \value{
-A list object with either 2 elements:
-  \code{estimate} the adjusted prevalence point estimate (only non-NULL if \code{prev}, \code{sens} and \code{spec} are specified).
-  \code{conf.int} the confidence interval for the adjusted prevalence.
+A list object with 2 elements:
+\item{estimate}{The adjusted prevalence point estimate (only non-NULL if \code{prev}, \code{sens} and \code{spec} are specified).}
+\item{conf.int}{The confidence interval for the adjusted prevalence.}
 }
 \description{
 This function takes as input a prevalence confidence interval, a sensitivity confidence interval and a specificity confidence interval and returns a confidence interval with the desired coverage of the adjusted prevalence.

@@ -29,22 +29,22 @@ devtools::install_github("gitMarcH/bootComb")
 
 ## Example
 
-Product of 2 probability parameters with beta distributions.
+95% confidence interval for the product of 2 prevalence parameters for which only the 95% confidence intervals are known.
 
 ``` r
 library(bootComb)
 
-dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
-dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
+dist1<-getBetaFromCI(pLow=0.1,pUpp=0.9,alpha=0.05)
+dist2<-getBetaFromCI(pLow=0.4,pUpp=0.9,alpha=0.05)
 
-distListEx<-list(dist1,dist2)
+distListEx<-list(dist1$r,dist2$r)
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 
 bootComb(distList=distListEx,combFun=combFunEx)
 #> 
 #> $conf.int
 #>      lower      upper 
-#> 0.03643913 0.64242678 
+#> 0.04113696 0.64856819 
 #> attr(,"credMass")
 #> [1] 0.95
 #> 

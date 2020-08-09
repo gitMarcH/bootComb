@@ -37,8 +37,8 @@ bootComb(
 }
 \value{
 A list with 2 elements:
-  \code{conf.int} a vector of length 2 giving the lower and upper limits of the computed confidence interval.
-  \code{bootstrapValues} a vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)
+\item{conf.int}{A vector of length 2 giving the lower and upper limits of the computed confidence interval.}
+\item{bootstrapValues}{A vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)}
 }
 \description{
 This package propagates uncertainty from several estimates when combining these estimates via a function.
@@ -46,10 +46,10 @@ It does this by using the parametric bootstrap to simulate values from the distr
 Finally either the percentile method is used or the highest density interval is chosen to derive a confidence interval for the combined parameter with the desired coverage.
 }
 \examples{
-## Example 1 - product of 2 beta distributions
-dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
-dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
-distListEx<-list(dist1,dist2)
+## Example 1 - product of 2 probability parameters for which only the 95\% CIs are reported
+dist1<-getBetaFromCI(pLow=0.4,pUpp=0.6,alpha=0.05)
+dist2<-getBetaFromCI(pLow=0.7,pUpp=0.9,alpha=0.05)
+distListEx<-list(dist1$r,dist2$r)
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
 

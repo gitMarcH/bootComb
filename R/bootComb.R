@@ -16,17 +16,17 @@
 #' @param validRange Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded.
 #'
 #' @return A list with 2 elements:
-#'   \code{conf.int} a vector of length 2 giving the lower and upper limits of the computed confidence interval.
-#'   \code{bootstrapValues} a vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)
+#' \item{conf.int}{A vector of length 2 giving the lower and upper limits of the computed confidence interval.}
+#' \item{bootstrapValues}{A vector containing the computed parameter values from the bootstrap samples of the input parameters. (Only non-NULL if \code{returnBootVals} is set to TRUE)}
 #'
 #' @seealso
 #' \code{\link[HDInterval]{hdi}}
 #'
 #' @examples
-#' ## Example 1 - product of 2 beta distributions
-#' dist1<-function(n){rbeta(n,shape1=2,shape2=2)}
-#' dist2<-function(n){rbeta(n,shape1=8,shape2=4)}
-#' distListEx<-list(dist1,dist2)
+#' ## Example 1 - product of 2 probability parameters for which only the 95% CIs are reported
+#' dist1<-getBetaFromCI(pLow=0.4,pUpp=0.6,alpha=0.05)
+#' dist2<-getBetaFromCI(pLow=0.7,pUpp=0.9,alpha=0.05)
+#' distListEx<-list(dist1$r,dist2$r)
 #' combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 #' bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)
 #'
