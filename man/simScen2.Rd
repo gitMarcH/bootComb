@@ -32,7 +32,7 @@ A list with 2 elements:
 This is a simulation to compute the coverage of the confidence interval returned by bootComb() in the case of adjusting a prevalence estimate for estimates of sensitivity and specificity.
 }
 \examples{
-\dontrun{
+\donttest{
 simScen2(p=0.15,sens=0.90,spec=0.95,nExp=250,nExpSens=1000,nExpSpec=500,B=100)
   # B value only for convenience here
   # Increase B to 1e3 or 1e4 (be aware this may run for some time).

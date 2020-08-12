@@ -10,7 +10,7 @@ bootComb(
   N = 1e+06,
   method = "hdi",
   coverage = 0.95,
-  doPlot = F,
+  doPlot = FALSE,
   legPos = "topright",
   returnBootVals = FALSE,
   validRange = NULL

@@ -81,9 +81,12 @@ adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,d
     adjPrev<-adjPrevSensSpec(prev,sens,spec)
   }
 
-  adjPrevCI<-bootComb(distList=distList,combFun=combFun,N=N,method=method,coverage=1-alpha,doPlot=FALSE,legPos=NULL,returnBootVals=T,validRange=c(0,1))
+  adjPrevCI<-bootComb(distList=distList,combFun=combFun,N=N,method=method,coverage=1-alpha,doPlot=FALSE,legPos=NULL,returnBootVals=TRUE,validRange=c(0,1))
 
   if(doPlot){
+    oldpar <- par(no.readonly = TRUE)
+    on.exit(par(oldpar))
+
     par(mfrow=c(2,1))
 
     x<-seq(0,1,length=1000)

@@ -49,7 +49,7 @@
 #'
 #' @export bootComb
 
-bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,legPos="topright",returnBootVals=FALSE,validRange=NULL){
+bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=FALSE,legPos="topright",returnBootVals=FALSE,validRange=NULL){
   pars<-vector("list",length=length(distList))
 
   for(k in 1:length(distList)){
@@ -71,17 +71,20 @@ bootComb<-function(distList,combFun,N=1e6,method="hdi",coverage=0.95,doPlot=F,le
   }
 
   if(doPlot){
-    layout(matrix(c(1:length(distList),rep(length(distList)+1,length(distList))),nrow=2,byrow=T))
+    oldpar <- par(no.readonly = TRUE)
+    on.exit(par(oldpar))
+
+    layout(matrix(c(1:length(distList),rep(length(distList)+1,length(distList))),nrow=2,byrow=TRUE))
 
     for(k in 1:length(distList)){
-      hist(pars[[k]],breaks=100,xlab=names(distList)[k],ylab="density",freq=F,main=paste(sep="","Histogram - sampled values for parameter ",k,"."))
+      hist(pars[[k]],breaks=100,xlab=names(distList)[k],ylab="density",freq=FALSE,main=paste(sep="","Histogram - sampled values for parameter ",k,"."))
     }
 
     hist(combParVals,breaks=100,freq=FALSE,xlab="combined parameter",ylab="density",main="Empirical distribution of the combined parameter.")
     abline(v=ci[1],lty=2,lwd=2,col="steelblue")
     abline(v=ci[2],lty=2,lwd=2,col="steelblue")
     if(!is.null(legPos)){
-      legend(x=legPos,bty="n",horiz=T,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
+      legend(x=legPos,bty="n",horiz=TRUE,lwd=2,lty=2,col=c("steelblue"),legend=c("95% confidence limits"))
     }
   }
 
