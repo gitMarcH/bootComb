@@ -1,7 +1,7 @@
 # bootComb
 
-[![](https://cranlogs.r-pkg.org/badges/mltools)](https://CRAN.R-project.org/package=mltools)
-[![](https://cranlogs.r-pkg.org/badges/grand-total/mltools)](https://CRAN.R-project.org/package=mltools)
+[![](https://cranlogs.r-pkg.org/badges/bootComb)](https://CRAN.R-project.org/package=bootComb)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/bootComb)](https://CRAN.R-project.org/package=bootComb)
 
 Deriving confidence intervals for combinations of independent parameter estimates.
 
