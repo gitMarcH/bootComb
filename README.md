@@ -13,9 +13,7 @@ Uncertainty is propagated through by sampling from probability distributions for
 
 Several specific applications, though the methodology is quite general:
 1. Combining several conditional prevalences (see e.g. [Stockdale et al., J. Hepatol. (2020)](https://doi.org/10.1016/j.jhep.2020.04.008))
-2. Adjusting a prevalence for assay sensitivity and specificity when
-   the latter are not known exactly and only estimates are available
-   (see e.g. the supplementary of []()).
+2. Adjusting a prevalence for assay sensitivity and specificity when the latter are not known exactly and only estimates are available.
 
 The method assumes that the combined estimates are independent. This is generally the case where parameters estimated on different datasets are combined, but in some situations this may not hold. Future version of this package will include support for some joint distributions.
 
