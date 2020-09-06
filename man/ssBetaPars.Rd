@@ -9,7 +9,7 @@ ssBetaPars(abPars, qLow, qUpp, alpha = 0.05)
 \arguments{
 \item{abPars}{The shape1 and shape2 parameters of the theoretical beta distribution.}
 
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 

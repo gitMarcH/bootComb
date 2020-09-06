@@ -1,9 +1,9 @@
 # bootComb 0.2.0.9000 (current development version)
 
 * Added cranlogs badges to README.md
-* Added support fro negative binomial and gamma distributions in addition to the beta, normal and Poisson distributions.
-
-?? remove suppot for Poisson and Neg Binomial? Quantile matching does not work as optim requires continuous functions to optimise, yet here the quantile functions are step functions...
+* Changed the way parameters are found for the poisson distribution. Rather than quantile matching, the CDF is matched (as this will be a continuous function rather than a step function in the way the quantile function is).
+* Added support for negative binomial, gamma and exonential distributions in addition to the beta, normal and Poisson distributions. Finding the best-fit negative binomial distribution proceeds similar to the procedure for the Poisson distribution as this is another discrete distribution and hence the quantile function is a step function (albeit a two-dimensional step function in this case).
+* Renamed the (internal only) function 'identifyPoisPars' to 'identifyPoisPar' for consistency with other one-parameter distribution.
 
 # bootComb 0.2.0 (first CRAN version)
 

@@ -7,7 +7,7 @@
 getNormFromCI(qLow, qUpp, alpha = 0.05, initPars = c(0, 1), maxiter = 1000)
 }
 \arguments{
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 

@@ -70,9 +70,9 @@ adjPrevSensSpec<-function(prevEst,sens,spec,replaceImpossibleValues=FALSE){
 
 adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,doPlot=FALSE,prev=NULL,sens=NULL,spec=NULL,ylim=NULL){
 
-  prevDist<-getBetaFromCI(pLow=prevCI[1],pUpp=prevCI[2])
-  sensDist<-getBetaFromCI(pLow=sensCI[1],pUpp=sensCI[2])
-  specDist<-getBetaFromCI(pLow=specCI[1],pUpp=specCI[2])
+  prevDist<-getBetaFromCI(qLow=prevCI[1],qUpp=prevCI[2])
+  sensDist<-getBetaFromCI(qLow=sensCI[1],qUpp=sensCI[2])
+  specDist<-getBetaFromCI(qLow=specCI[1],qUpp=specCI[2])
 
   distList<-list(prevDist$r,sensDist$r,specDist$r)
   combFun<-function(pars){adjPrevSensSpec(prevEst=pars[[1]],sens=pars[[2]],spec=pars[[3]])}

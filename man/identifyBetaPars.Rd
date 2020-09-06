@@ -13,7 +13,7 @@ identifyBetaPars(
 )
 }
 \arguments{
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 
@@ -24,7 +24,7 @@ identifyBetaPars(
 \item{maxiter}{Maximum number of iterations for \code{optim}. Defaults to 1e3. Set to higher values if convergence problems are reported.}
 }
 \value{
-A vector of length 2 giving the 2 parameters shape1 and shape1 for use with rbeta/dbeta/pbeta/qbeta
+A vector of length 2 giving the 2 parameters shape1 and shape1 for use with rbeta/dbeta/pbeta/qbeta.
 }
 \description{
 Finds the best-fit beta distribution parameters for a given confidence interval for a probability parameter and returns the shape1, shape2 parameters.

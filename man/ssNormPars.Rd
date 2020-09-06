@@ -9,7 +9,7 @@ ssNormPars(muSigPars, qLow, qUpp, alpha = 0.05)
 \arguments{
 \item{muSigPars}{The mean and standard deviation parameters of the theoretical normal distribution.}
 
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 

@@ -24,8 +24,8 @@
 #'
 #' @examples
 #' ## Example 1 - product of 2 probability parameters for which only the 95% CIs are reported
-#' dist1<-getBetaFromCI(pLow=0.4,pUpp=0.6,alpha=0.05)
-#' dist2<-getBetaFromCI(pLow=0.7,pUpp=0.9,alpha=0.05)
+#' dist1<-getBetaFromCI(qLow=0.4,qUpp=0.6,alpha=0.05)
+#' dist2<-getBetaFromCI(qLow=0.7,qUpp=0.9,alpha=0.05)
 #' distListEx<-list(dist1$r,dist2$r)
 #' combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 #' bootComb(distList=distListEx,combFun=combFunEx,doPlot=TRUE)

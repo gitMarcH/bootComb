@@ -7,7 +7,7 @@
 getBetaFromCI(qLow, qUpp, alpha = 0.05, initPars = c(50, 50), maxiter = 1000)
 }
 \arguments{
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 

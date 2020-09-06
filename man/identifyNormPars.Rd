@@ -7,7 +7,7 @@
 identifyNormPars(qLow, qUpp, alpha = 0.05, initPars = c(0, 1), maxiter = 1000)
 }
 \arguments{
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 
@@ -18,7 +18,7 @@ identifyNormPars(qLow, qUpp, alpha = 0.05, initPars = c(0, 1), maxiter = 1000)
 \item{maxiter}{Maximum number of iterations for \code{optim}. Defaults to 1e3. Set to higher values if convergence problems are reported.}
 }
 \value{
-A vector of length 2 giving the 2 parameters mean and sd for use with rnorm/dnorm/pnorm/qnorm
+A vector of length 2 giving the 2 parameters mean and sd for use with rnorm/dnorm/pnorm/qnorm.
 }
 \description{
 Finds the best-fit normal distribution parameters for a given confidence interval and returns the mean and sd parameters.

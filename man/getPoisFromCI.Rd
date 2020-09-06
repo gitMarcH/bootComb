@@ -7,7 +7,7 @@
 getPoisFromCI(qLow, qUpp, alpha = 0.05, initPars = 5, maxiter = 1000)
 }
 \arguments{
-\item{qLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile.}
 
 \item{qUpp}{The observed upper quantile.}
 
@@ -23,7 +23,7 @@ A list with 5 elements:
 \item{d}{The probability mass function.}
 \item{p}{The distribution function.}
 \item{q}{The quantile function.}
-\item{pars}{A vector of length 1 giving the rate parameter for the best-fit Poisson distribution (\code{lambda} as in \code{\link{rpois}}, \code{\link{dpois}}, \code{\link{ppois}}, \code{\link{qpois}}).}
+\item{pars}{A single number giving the rate parameter for the best-fit Poisson distribution (\code{lambda} as in \code{\link{rpois}}, \code{\link{dpois}}, \code{\link{ppois}}, \code{\link{qpois}}).}
 }
 \description{
 Finds the best-fit Poisson distribution for a given confidence interval; returns the corresponding probability mass, distribution, quantile and sampling functions.
