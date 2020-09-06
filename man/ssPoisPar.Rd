@@ -4,14 +4,14 @@
 \alias{ssPoisPar}
 \title{Compute the sum of squares between the theoretical and observed quantiles of a Poisson distribution.}
 \usage{
-ssPoisPar(poisPar, pLow, pUpp, alpha = 0.05)
+ssPoisPar(poisPar, qLow, qUpp, alpha = 0.05)
 }
 \arguments{
 \item{poisPar}{The rate parameter of the theoretical Poisson distribution.}
 
-\item{pLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile .}
 
-\item{pUpp}{The observed upper quantile.}
+\item{qUpp}{The observed upper quantile.}
 
 \item{alpha}{The confidence level; i.e. the desired coverage is 1-alpha. Defaults to 0.05.}
 }

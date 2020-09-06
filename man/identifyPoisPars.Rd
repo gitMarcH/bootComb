@@ -4,12 +4,12 @@
 \alias{identifyPoisPars}
 \title{Determine the parameters of the best-fit Poisson distribution for a given confidence interval.}
 \usage{
-identifyPoisPars(pLow, pUpp, alpha = 0.05, initPars = 5, maxiter = 1000)
+identifyPoisPars(qLow, qUpp, alpha = 0.05, initPars = 5, maxiter = 1000)
 }
 \arguments{
-\item{pLow}{The observed lower quantile .}
+\item{qLow}{The observed lower quantile .}
 
-\item{pUpp}{The observed upper quantile.}
+\item{qUpp}{The observed upper quantile.}
 
 \item{alpha}{The confidence level; i.e. the desired coverage is 1-alpha. Defaults to 0.05.}
 
