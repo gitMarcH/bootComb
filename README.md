@@ -39,17 +39,17 @@ devtools::install_github("gitMarcH/bootComb")
 ``` r
 library(bootComb)
 
-dist1<-getBetaFromCI(pLow=0.1,pUpp=0.9,alpha=0.05)
-dist2<-getBetaFromCI(pLow=0.4,pUpp=0.9,alpha=0.05)
+dist1<-getBetaFromCI(qLow=0.2,qUpp=0.8,alpha=0.05)
+dist2<-getBetaFromCI(qLow=0.4,qUpp=0.9,alpha=0.05)
 
 distListEx<-list(dist1$r,dist2$r)
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 
-bootComb(distList=distListEx,combFun=combFunEx)
+bootComb(distList=distListEx,combFun=combFunEx,method="hdi")
 #> 
 #> $conf.int
-#>      lower      upper 
-#> 0.04113696 0.64856819 
+#>     lower     upper 
+#> 0.1049555 0.5872140 
 #> attr(,"credMass")
 #> [1] 0.95
 #> 
