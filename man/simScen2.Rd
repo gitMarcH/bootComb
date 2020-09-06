@@ -25,8 +25,8 @@ simScen2(B = 1000, p, sens, spec, nExp, nExpSens, nExpSpec, alpha = 0.05)
 }
 \value{
 A list with 2 elements:
-   \code{estimate} A single number, the proportion of simulations for which the confidence interval contained the true prevalence parameter value.
-   \code{conf.int} A 95% confidence interval for the coverage estimate.
+   \item{estimate}{A single number, the proportion of simulations for which the confidence interval contained the true prevalence parameter value.}
+   \item{conf.int}{A 95\% confidence interval for the coverage estimate.}
 }
 \description{
 This is a simulation to compute the coverage of the confidence interval returned by bootComb() in the case of adjusting a prevalence estimate for estimates of sensitivity and specificity.
