@@ -75,7 +75,7 @@ simScenProductTwoPrevs<-function(B=1e3,p1,p2,nExp1,nExp2,alpha=0.05){
 #'
 #' @examples
 #' \donttest{
-#' simScenPrevSensSpec(p=0.15,sens=0.90,spec=0.95,nExp=250,nExpSens=1000,nExpSpec=500,B=100)
+#' simScenPrevSensSpec(p=0.15,sens=0.85,spec=0.90,nExp=300,nExpSens=600,nExpSpec=400,B=1000)
 #'   # B value only for convenience here
 #'   # Increase B to 1e3 or 1e4 (be aware this may run for some time).
 #'  }
