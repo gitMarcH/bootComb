@@ -11,7 +11,6 @@ adjPrevSensSpecCI(
   N = 1e+06,
   method = "hdi",
   alpha = 0.05,
-  rmImpossibleValues = FALSE,
   doPlot = FALSE,
   prev = NULL,
   sens = NULL,
@@ -31,8 +30,6 @@ adjPrevSensSpecCI(
 \item{method}{The method uses to derive a confidence interval from the empirical distribution of the combined parameter. Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval).}
 
 \item{alpha}{The desired confidence level; i.e. the returned confidence interval will have coverage 1-alpha.}
-
-\item{rmImpossibleValues}{Logical; not all combinations of prevalence, sensitivity and specificity are possible and it can be that the adjusted prevalence is <0 or >1, so if this parameter is set to TRUE, values below 0 or above 1 are removed. This behaviour is a consequence of measured prevalence, sensitivity and specificity will not be independent, though bootComb assumes this. Defaults to FALSE.}
 
 \item{doPlot}{Logical; indicates whether a graph should be produced showing the input estimated distributions for the prevalence, sensitivity and specificity estimates and the resulting empirical distribution of the adjusted prevalence together with the reported confidence interval. Defaults to FALSE.}
 

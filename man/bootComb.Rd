@@ -33,7 +33,7 @@ bootComb(
 
 \item{returnBootVals}{Logical; if TRUE then the parameter values computed from the boostrapped input parameter values will be returned; defaults to FALSE.}
 
-\item{validRange}{Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded.}
+\item{validRange}{Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded. Behaviour that results in the need for this option arises when parameters are not independent. Use with caution.}
 }
 \value{
 A list with 2 elements:

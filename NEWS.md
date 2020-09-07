@@ -1,6 +1,6 @@
 # bootComb 1.0.0
 
-With the inclusion of additional distributions functions that are supported, this is considered to be the first mature version of the package. Some changes for consistency of coding are also minimally not backward compatible, hence the upgrade to version number 1.0.0.
+With the inclusion of additional distributions functions that are supported, this is considered to be the first mature version of the package. Some changes for consistency of coding and better function naming are also minimally not backward compatible, hence the upgrade to version number 1.0.0.
 
 * Added cranlogs badges to README.md
 * Changed the way parameters are found for the poisson distribution. Rather than quantile matching, the CDF is matched (as this will be a continuous function rather than a step function in the way the quantile function is).
@@ -10,6 +10,7 @@ With the inclusion of additional distributions functions that are supported, thi
 * Default method for interval computation changed from `hdi` to `quantile` as the latter will always be correct and the former may be wrong if the bootstrap sample of combined parameter values is severely multimodal.
 * Dependency on package `HDInterval` turned into a "Suggests" rather than an "Imports" dependency with `bootComb` falling back on `method='quantile'` if `HDInterval` is not available.
 * Small update to the example from the README.md file.
+* Clarified the names for the functions to run the 2 example simulations.
 
 # bootComb 0.2.0
 

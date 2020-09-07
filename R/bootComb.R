@@ -13,7 +13,7 @@
 #' @param doPlot Logical; indicates whether a graph should be produced showing the input distributions and the resulting empirical distribution of the combined estimate together with the reported confidence interval. Defaults to FALSE.
 #' @param legPos Legend position (only used if doPlot==TRUE); either NULL (no legend) or one of "top", "topleft", "topright", "bottom", "bottomleft", "bottomright" "left", "right", "center".
 #' @param returnBootVals Logical; if TRUE then the parameter values computed from the boostrapped input parameter values will be returned; defaults to FALSE.
-#' @param validRange Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded.
+#' @param validRange Optional; if not NULL, a vector of length 2 giving the range within which the values obtained from the bootstrapped input parameters must lie; values outside this range will be discarded. Behaviour that results in the need for this option arises when parameters are not independent. Use with caution.
 #'
 #' @return A list with 2 elements:
 #' \item{conf.int}{A vector of length 2 giving the lower and upper limits of the computed confidence interval.}

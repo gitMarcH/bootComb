@@ -6,7 +6,7 @@
 #' @param prevEst The reported prevalence point estimate.
 #' @param sens The known assay sensitivity.
 #' @param spec The known assay specificity.
-#' @param rmImpossibleValues Logical; not all combinations of prevalence, sensitivity and specificity are possible and it can be that the adjusted prevalence is <0 or >1, so if this parameter is set to TRUE, values below 0 or above 1 are removed. This behaviour is a consequence of measured prevalence, sensitivity and specificity will not be independent, though bootComb assumes this. Defaults to FALSE.
+#' @param replaceImpossibleValues Logical; not all combinations of prevalence, sensitivity and specificity are possible and it can be that the adjusted prevalence is <0 or >1, so if this parameter is set to TRUE, values below 0 are set to 0, values above 1 to 1. Default to FALSE.
 #'
 #' @return A vector of the same length as prevEst, returning the adjusted prevalence estimates.
 #'
@@ -18,13 +18,14 @@
 #'
 #' @export adjPrevSensSpec
 
-adjPrevSensSpec<-function(prevEst,sens,spec,rmImpossibleValues=FALSE){
+adjPrevSensSpec<-function(prevEst,sens,spec,replaceImpossibleValues=FALSE){
   if((length(sens)!=length(prevEst) & length(sens)!=1) | (length(spec)!=length(prevEst) & length(spec)!=1)){stop("sens and spec need to be either vectors of the same length as prevEst or scalars / vectors or length 1.")}
 
   prevAdj<-(prevEst-(1-spec))/(sens-(1-spec))
 
-  if(rmImpossibleValues){
-    prevAdj<-prevAdj[prevAdj>=0 & prevAdj<=1]
+  if(replaceImpossibleValues){
+    prevAdj[prevAdj<0]<-0
+    prevAdj[prevAdj>1]<-1
   }
 
   return(prevAdj)
@@ -42,7 +43,6 @@ adjPrevSensSpec<-function(prevEst,sens,spec,rmImpossibleValues=FALSE){
 #' @param N A (large) integer giving the number of parametric bootstrap samples to take. Defaults to 1e6.
 #' @param method The method uses to derive a confidence interval from the empirical distribution of the combined parameter. Needs to be one of 'hdi' (default; computes the highest density interval) or 'quantile (uses quantiles to derive the confidence interval).
 #' @param alpha The desired confidence level; i.e. the returned confidence interval will have coverage 1-alpha.
-#' @param rmImpossibleValues Logical; not all combinations of prevalence, sensitivity and specificity are possible and it can be that the adjusted prevalence is <0 or >1, so if this parameter is set to TRUE, values below 0 or above 1 are removed. This behaviour is a consequence of measured prevalence, sensitivity and specificity will not be independent, though bootComb assumes this. Defaults to FALSE.
 #' @param doPlot Logical; indicates whether a graph should be produced showing the input estimated distributions for the prevalence, sensitivity and specificity estimates and the resulting empirical distribution of the adjusted prevalence together with the reported confidence interval. Defaults to FALSE.
 #' @param prev Optional; if not NULL, and parameters \code{sens} and \code{spec} are also not NULL, then an adjusted point estimate will also be calculated.
 #' @param sens Optional; if not NULL, and parameters \code{prev} and \code{spec} are also not NULL, then an adjusted point estimate will also be calculated.
@@ -68,7 +68,7 @@ adjPrevSensSpec<-function(prevEst,sens,spec,rmImpossibleValues=FALSE){
 #'
 #' @export adjPrevSensSpecCI
 
-adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,rmImpossibleValues=FALSE,doPlot=FALSE,prev=NULL,sens=NULL,spec=NULL,ylim=NULL){
+adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,doPlot=FALSE,prev=NULL,sens=NULL,spec=NULL,ylim=NULL){
 
   prevDist<-getBetaFromCI(qLow=prevCI[1],qUpp=prevCI[2],alpha=alpha)
   sensDist<-getBetaFromCI(qLow=sensCI[1],qUpp=sensCI[2],alpha=alpha)
@@ -78,7 +78,7 @@ adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,r
   combFun<-function(pars){adjPrevSensSpec(prevEst=pars[[1]],sens=pars[[2]],spec=pars[[3]])}
 
   if(!is.null(prev) & !is.null(sens) & !is.null(spec)){
-    adjPrev<-adjPrevSensSpec(prev,sens,spec,rmImpossibleValues=rmImpossibleValues)
+    adjPrev<-adjPrevSensSpec(prev,sens,spec)
   }
 
   adjPrevCI<-bootComb(distList=distList,combFun=combFun,N=N,method=method,coverage=1-alpha,doPlot=FALSE,legPos=NULL,returnBootVals=TRUE,validRange=c(0,1))
@@ -101,6 +101,7 @@ adjPrevSensSpecCI<-function(prevCI,sensCI,specCI,N=1e6,method="hdi",alpha=0.05,r
     legend(x="top",col=c("steelblue","orange","salmon"),legend=c("prevalence","sensitivity","specificity"),lwd=2,horiz=TRUE,bty="n")
 
     hist(adjPrevCI$bootstrapValues,breaks=100,freq=FALSE,xlab="adjusted prevalence",ylab="density",xlim=c(0,1),main="Histogram of the sensitivity- & specificity-adjusted prevalence")
+    box()
     abline(v=adjPrevCI$conf.int[1],lty=2,lwd=2,col="steelblue")
     abline(v=adjPrevCI$conf.int[2],lty=2,lwd=2,col="steelblue")
     if(!is.null(prev) & !is.null(sens) & !is.null(spec)){
