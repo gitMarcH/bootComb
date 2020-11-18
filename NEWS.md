@@ -1,6 +1,10 @@
-# bootComb 1.0.0.9000 (current development version)
+# bootComb 1.0.1.9000 (current development version)
 
-No updates yet.
+* No updates yet.
+
+# bootComb 1.0.1
+
+* Fixed a bug with the internal functions identifyBetaPars, identifyNormPars, identifyPoisPars, identifyNegBinPars, identifyGammaPars, identifyExpPars whereby the `alpha` parameter did not get passed through.
 
 # bootComb 1.0.0
 
