@@ -4,7 +4,7 @@
 
 # bootComb 1.0.1
 
-* Fixed a bug with the internal functions identifyBetaPars, identifyNormPars, identifyPoisPars, identifyNegBinPars, identifyGammaPars, identifyExpPars whereby the `alpha` parameter did not get passed through.
+* Fixed a bug with the internal functions `identifyBetaPars`, `identifyNormPars`, `identifyPoisPars`, `identifyNegBinPars`, `identifyGammaPars`, `identifyExpPars` whereby the `alpha` parameter did not get passed through.
 
 # bootComb 1.0.0
 
