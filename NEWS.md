@@ -1,6 +1,6 @@
 # bootComb 1.0.2.9000 (current development version)
 
-* No updates yet.
+* Minor update to README.md (citation info to avoid hard-coded reference to version number).
 
 # bootComb 1.0.2
 
