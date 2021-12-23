@@ -1,6 +1,11 @@
-# bootComb 1.0.2.9000 (current development version)
+# bootComb 1.1.0
 
-* Minor update to README.md (citation info to avoid hard-coded reference to version number).
+* Support added for dependent / correlated parameters (using Gaussian copulas to specify the dependence). This is done by specifying a correlation matrix (new input argument `Sigma`).
+* Added an alternative, and simpler, way of calling the main package function `bootComb` (new input arguments `distributions`, `qLowVect`, `qUppVect` and `alphaVect`).
+* `returnBootVals` returns now also the values for the individual parameters that get combined. This change allows checking the dependence structure that was specified.
+* A random seed can now be specified as an input argument to the `bootComb` function (argument `seed`).
+* Update to README.md (example of alternative specification and citation info to avoid hard-coded reference to version number).
+
 
 # bootComb 1.0.2
 
