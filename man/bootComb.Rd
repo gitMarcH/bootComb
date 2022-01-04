@@ -73,7 +73,9 @@ combFunEx<-function(pars){pars[[1]]*pars[[2]]}
 bootComb(distList=distListEx,
          combFun=combFunEx,
          doPlot=TRUE,
-         method="hdi")
+         method="hdi",
+         N=1e5, # reduced from N=1e6 so that it runs quicker; larger values => more accurate
+         seed=352)
 
 # Alternatively, the same example can be run in just 2 lines of code:
 combFunEx<-function(pars){pars[[1]]*pars[[2]]}
@@ -82,7 +84,9 @@ bootComb(distributions=c("beta","beta"),
          qUppVect=c(0.6,0.9),
          combFun=combFunEx,
          doPlot=TRUE,
-         method="hdi")
+         method="hdi",
+         N=1e5, # reduced from N=1e6 so that it runs quicker; larger values => more accurate
+         seed=352)
 
 ## Example 2 - sum of 3 Gaussian distributions
 dist1<-function(n){rnorm(n,mean=5,sd=3)}
@@ -109,7 +113,9 @@ bootComb(distributions=c("beta","beta"),
          Sigma=matrix(byrow=2,ncol=2,c(1,0.5,0.5,1)),
          combFun=combFunEx,
          doPlot=TRUE,
-         method="hdi")
+         method="hdi",
+         N=1e5, # reduced from N=1e6 so that it runs quicker; larger values => more accurate
+         seed=352)
 
 }
 \seealso{

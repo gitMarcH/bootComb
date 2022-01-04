@@ -1,3 +1,8 @@
+# bootComb 1.1.1
+
+* Reduced the number of bootstrap samples for the example used for the `bootComb` example as CRAN gave an error that examples take over 10s to run.
+* Added a seed value for the examples for the `bootComb` function.
+
 # bootComb 1.1.0
 
 * Support added for dependent / correlated parameters (using Gaussian copulas to specify the dependence). This is done by specifying a correlation matrix (new input argument `Sigma`).
